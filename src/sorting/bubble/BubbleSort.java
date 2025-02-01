@@ -2,7 +2,11 @@ package sorting.bubble;
 
 import java.util.Arrays;
 
-public class bubbleSort {
+/*
+*   배열의 시작점 또는 마지막점을 시작으로 옆에 인접한 값을 비교해서 정렬 하는 알고리즘
+*
+* */
+public class BubbleSort {
 
     /*
     *
