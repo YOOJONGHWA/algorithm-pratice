@@ -1,4 +1,4 @@
-package graph.dfs;
+package search.dfs;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package graph.bfs;
+package search.bfs;
 
 import java.io.*;
 import java.util.*;

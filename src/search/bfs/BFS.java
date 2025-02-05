@@ -1,4 +1,4 @@
-package graph.bfs;
+package search.bfs;
 
 import java.util.*;
 
@@ -7,6 +7,7 @@ public class BFS {
     static boolean[] visited;
 
     public static void main(String[] args) {
+
         int n = 7;
         graph = new ArrayList[n + 1];
         visited = new boolean[n + 1];
