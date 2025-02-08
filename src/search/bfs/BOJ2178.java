@@ -35,15 +35,70 @@ import java.util.*;
 
 public class BOJ2178 {
 
+//    static int[][] board;
+//    static boolean[][] visited;
+//    static int[] dx = {-1, 1, 0, 0};  // 상, 하, 좌, 우
+//    static int[] dy = {0, 0, -1, 1};
+//
+//    public static void main(String[] args) throws IOException {
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+//
+//        int n = Integer.parseInt(st.nextToken());
+//        int m = Integer.parseInt(st.nextToken());
+//
+//        board = new int[n][m];
+//        visited = new boolean[n][m];
+//
+//        for (int i = 0; i < n; i++) {
+//            char[] line = br.readLine().toCharArray();
+//            for (int j = 0; j < m; j++) {
+//                board[i][j] = line[j] - '0';
+//            }
+//        }
+//
+//        System.out.println(BFS(0, 0, n, m));
+//    }
+//
+//    private static int BFS(int startX, int startY, int n, int m) {
+//        ArrayDeque<int[]> queue = new ArrayDeque<>();
+//        queue.addLast(new int[]{startX, startY});
+//        visited[startX][startY] = true;
+//
+//        while (!queue.isEmpty()) {
+//            int[] current = queue.poll();
+//            int x = current[0];
+//            int y = current[1];
+//
+//            if (x == n - 1 && y == m - 1) {
+//                return board[x][y];
+//            }
+//
+//            for (int i = 0; i < 4; i++) {
+//                int nx = x + dx[i];
+//                int ny = y + dy[i];
+//
+//                if (nx >= 0 && nx < n && ny >= 0 && ny < m && board[nx][ny] == 1 && !visited[nx][ny]) {
+//                    visited[nx][ny] = true;
+//                    board[nx][ny] = board[x][y] + 1;
+//                    queue.addLast(new int[]{nx, ny});
+//                }
+//            }
+//        }
+//
+//        return -1;
+//    }
+
+
     static int[][] board;
     static boolean[][] visited;
-    static int[] dx = {-1, 1, 0, 0};  // 상, 하, 좌, 우
+    static int[] dx = {1, -1, 0, 0};
     static int[] dy = {0, 0, -1, 1};
 
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine()," ");
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
 
@@ -57,31 +112,34 @@ public class BOJ2178 {
             }
         }
 
-        System.out.println(BFS(0, 0, n, m));
+        System.out.println(findGoal(0 , 0, n, m));
+
     }
 
-    private static int BFS(int startX, int startY, int n, int m) {
-        ArrayDeque<int[]> queue = new ArrayDeque<>();
-        queue.addLast(new int[]{startX, startY});
+    private static int findGoal(int startX, int startY, int lastX , int lastY) {
+
+        Queue<int[]> queue = new ArrayDeque<>();
+        queue.add(new int[]{startX, startY});
         visited[startX][startY] = true;
 
         while (!queue.isEmpty()) {
-            int[] current = queue.poll();
-            int x = current[0];
-            int y = current[1];
 
-            if (x == n - 1 && y == m - 1) {
+            int[] cur = queue.poll();
+            int x = cur[0];
+            int y = cur[1];
+
+            if (x == lastX - 1  && y == lastY - 1) {
                 return board[x][y];
             }
 
             for (int i = 0; i < 4; i++) {
-                int nx = x + dx[i];
-                int ny = y + dy[i];
+                int nextX = x + dx[i];
+                int nextY = y + dy[i];
 
-                if (nx >= 0 && nx < n && ny >= 0 && ny < m && board[nx][ny] == 1 && !visited[nx][ny]) {
-                    visited[nx][ny] = true;
-                    board[nx][ny] = board[x][y] + 1;
-                    queue.addLast(new int[]{nx, ny});
+                if (nextX >= 0 && nextX < lastX && nextY >= 0 && nextY < lastY && !visited[nextX][nextY] && board[nextX][nextY] == 1) {
+                    visited[nextX][nextY] = true;
+                    board[nextX][nextY] = board[x][y] + 1;
+                    queue.add(new int[]{nextX, nextY});
                 }
             }
         }
